@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Rush</title>
+  <meta name="description" content="Rush — a location-based social app for adults." />
+  <style>
+    :root { --bg:#000; --card:#0c0c0e; --text:#fff; --muted:#8a8a90; --accent:#FF3366; --border:#1e1e22; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; height:100%; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      min-height:100vh; text-align:center; padding:32px;
+    }
+    .logo { font-size:88px; font-weight:800; color:var(--accent); letter-spacing:-2px; line-height:1; }
+    .word { font-size:26px; font-weight:800; color:var(--accent); letter-spacing:10px; margin-top:6px; }
+    .tag { color:var(--muted); font-size:16px; margin-top:20px; max-width:360px; line-height:1.5; }
+    .links { margin-top:36px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center; }
+    .links a {
+      color:var(--text); text-decoration:none; font-size:14px; font-weight:600;
+      border:1px solid var(--border); border-radius:999px; padding:10px 20px;
+    }
+    .links a:hover { border-color:var(--accent); color:var(--accent); }
+    footer { color:var(--muted); font-size:12px; margin-top:48px; }
+    footer a { color:var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="logo">R</div>
+  <div class="word">rush</div>
+  <p class="tag">A location-based social app for adults. Coming soon.</p>
+  <nav class="links">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+    <a href="mailto:support@rushapp.io">Contact</a>
+  </nav>
+  <footer>© 2026 Rush · <a href="mailto:support@rushapp.io">support@rushapp.io</a></footer>
+</body>
+</html>
