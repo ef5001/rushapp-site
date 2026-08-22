@@ -15,8 +15,6 @@
   main { max-width:760px; margin:0 auto; padding:48px 22px 96px; }
   h1 { font-size:32px; letter-spacing:-.02em; margin:0 0 4px; }
   .sub { color:var(--ink-2); font-size:14px; margin:0 0 8px; }
-  .placeholder { background:#ffe9b0; color:#5a4300; padding:0 4px; border-radius:3px; font-weight:600; }
-  @media (prefers-color-scheme: dark){ .placeholder{ background:#4a3a12; color:#ffd98a; } }
   h2 { font-size:20px; margin:38px 0 10px; padding-top:18px; border-top:1px solid var(--line); }
   h3 { font-size:16px; margin:22px 0 6px; }
   p, li { color:var(--ink); font-size:15.5px; }
@@ -34,7 +32,7 @@
 <body>
 <main>
   <h1>Privacy Policy</h1>
-  <p class="sub">Rush — a location-based social app for adults. Last updated: August 2, 2026.</p>
+  <p class="sub">Rush — a location-based social app for adults. Last updated: August 22, 2026.</p>
 
   <div class="callout">
     Rush is intended only for people <strong>18 years of age or older</strong>. This policy explains what we
@@ -42,9 +40,10 @@
     <a href="./terms.html">Terms of Service</a>.
   </div>
 
-  <p>This app ("<strong>Rush</strong>", "we", "us") is operated by
-    <span class="placeholder">[OPERATOR NAME]</span> ("the Operator"). By creating an account or using Rush,
-    you agree to the collection and use of information as described here.</p>
+  <p>Rush ("<strong>Rush</strong>", "we", "us", "our") is operated by <strong>Chaotic Neutral LLC</strong>
+    ("the Operator"), which is the <strong>data controller</strong> responsible for your personal information.
+    By creating an account or using Rush, you agree to the collection and use of information as described here.
+    You can reach us about privacy at <a href="mailto:support@rushapp.io">support@rushapp.io</a>.</p>
 
   <h2>1. Information we collect</h2>
   <p>We collect only what we need to run the service. Everything below is provided by you or generated as you use the app.</p>
@@ -54,6 +53,7 @@
     <li>Your email address and a password (used to sign in; passwords are handled by our authentication provider and stored only in hashed form).</li>
     <li>Your date of birth, used to confirm you are 18 or older.</li>
     <li>A display name.</li>
+    <li>A record of the consents you give (for example, your age confirmation and your consent to processing sensitive information), including when they were given.</li>
   </ul>
 
   <h3>Profile information you choose to provide</h3>
@@ -97,7 +97,66 @@
     <li>To fix bugs and improve the app.</li>
   </ul>
 
-  <h2>3. How your information is shared</h2>
+  <h2>3. Legal bases for processing (EEA / UK users)</h2>
+  <p>If you are in the European Economic Area or the United Kingdom, we rely on the following legal bases under the
+    GDPR (and UK GDPR) to process your personal data:</p>
+  <table>
+    <tr><th>Purpose</th><th>Legal basis</th></tr>
+    <tr><td>Creating and operating your account, profile, matching, and messaging</td><td>Performance of a contract (Art. 6(1)(b))</td></tr>
+    <tr><td>Keeping the community safe, preventing abuse and fraud, securing the service</td><td>Our legitimate interests (Art. 6(1)(f))</td></tr>
+    <tr><td>Sending notifications you have enabled</td><td>Your consent (Art. 6(1)(a)); you can turn them off anytime</td></tr>
+    <tr><td>Meeting legal obligations and responding to lawful requests</td><td>Legal obligation (Art. 6(1)(c))</td></tr>
+    <tr><td>Sensitive information you add (health, sexual orientation, race/ethnicity)</td><td><strong>Your explicit consent (Art. 9(2)(a))</strong></td></tr>
+  </table>
+  <p>Where we rely on your consent, you can withdraw it at any time — see Section 5. Withdrawing consent does not
+    affect processing we carried out before you withdrew it.</p>
+
+  <h2>4. Sensitive information</h2>
+  <p>Some profile fields are optional and may reveal sensitive information about you, such as race or ethnicity,
+    sexual orientation, or health information like HIV status. Providing these is entirely your choice — you can
+    leave them blank, and you can edit or remove them at any time in the app.</p>
+  <p>Because this is "special category" data under the GDPR, we process it only on the basis of your
+    <strong>explicit consent</strong>, which you give when you create your account and which you confirm by choosing
+    to add these details to your profile. When you add sensitive information, you understand it will be shown to
+    other users as part of your profile. We use it only to display your profile and power the filters and features
+    you ask for. We never sell it, and never use it for advertising or profiling. You can withdraw your consent at
+    any time by removing the information from your profile or deleting your account.</p>
+
+  <h2>5. Your rights and choices</h2>
+  <p>Depending on where you live, you have some or all of the following rights over your personal data. For users in
+    the EEA and UK these are guaranteed by the GDPR; we extend the same controls to all users wherever we can.</p>
+  <ul>
+    <li><strong>Access</strong> — get a copy of the personal data we hold about you. You can export your data in the
+      app (Settings &rarr; Export My Data), or request it at <a href="mailto:support@rushapp.io">support@rushapp.io</a>.</li>
+    <li><strong>Rectification</strong> — correct or update your information by editing your profile in the app.</li>
+    <li><strong>Erasure</strong> — delete your account from Settings &rarr; Delete Account. This permanently removes
+      your profile, photos, albums, messages, and associated data from our systems.</li>
+    <li><strong>Portability</strong> — receive your data in a structured, machine-readable format (the in-app export
+      is provided as JSON).</li>
+    <li><strong>Restriction and objection</strong> — ask us to limit or stop certain processing, including
+      processing based on our legitimate interests.</li>
+    <li><strong>Withdraw consent</strong> — where we rely on your consent (including for sensitive information and
+      notifications), withdraw it at any time.</li>
+    <li><strong>Control notifications and visibility</strong> through the app's Settings and Safety &amp; Privacy screens.</li>
+    <li><strong>Block or report</strong> other users.</li>
+  </ul>
+  <p>To exercise any right, use the in-app controls above or contact
+    <a href="mailto:support@rushapp.io">support@rushapp.io</a>. We do not make decisions that produce legal or
+    similarly significant effects about you using solely automated processing.</p>
+  <p>If you are in the EEA or UK and believe we have not handled your data properly, you have the right to lodge a
+    complaint with your local data protection supervisory authority. We would appreciate the chance to address your
+    concern first.</p>
+
+  <h3>California residents (CCPA / CPRA)</h3>
+  <p>If you live in California, you have the right to know what personal information we collect, to access and
+    delete it, to correct it, and to not be discriminated against for exercising these rights. Because we do not
+    sell personal information or share it for cross-context behavioral advertising, there is nothing to opt out of
+    in that respect. We limit the use of sensitive personal information to providing the service, as described above.
+    The categories of personal information we collect are described in Section 1: identifiers, account and contact
+    data, approximate location, user content (photos, messages), sensitive information you choose to provide, and
+    product-interaction data.</p>
+
+  <h2>6. How your information is shared</h2>
   <h3>With other users</h3>
   <p>Your profile — including your display name, photos, the profile details you fill in, and your approximate
     distance — is visible to other users of Rush. Messages you send are delivered to the people you send them to.
@@ -111,6 +170,7 @@
     <tr><th>Provider</th><th>Purpose</th></tr>
     <tr><td>Supabase</td><td>Backend database, authentication, and media storage (our hosting infrastructure).</td></tr>
     <tr><td>Expo</td><td>Push-notification delivery and over-the-air app updates.</td></tr>
+    <tr><td>Resend</td><td>Sending account and verification emails.</td></tr>
   </table>
 
   <h3>For legal and safety reasons</h3>
@@ -125,61 +185,35 @@
       advertising or profiling.</li>
   </ul>
 
-  <h2>4. Sensitive information</h2>
-  <p>Some profile fields are optional and may reveal sensitive information about you, such as race or ethnicity,
-    sexual orientation, or health information like HIV status. Providing these is entirely your choice — you can
-    leave them blank, and you can edit or remove them at any time in the app.</p>
-  <p>When you add sensitive information to your profile, you understand it will be shown to other users as part of
-    your profile. We use this information only to display your profile and power the filters and features you ask
-    for. We never sell it and never use it for advertising.</p>
-
-  <h2>5. Your rights and choices</h2>
-  <p>You can, at any time:</p>
-  <ul>
-    <li><strong>Access and update</strong> your information by editing your profile in the app.</li>
-    <li><strong>Delete your account</strong> from Settings &rarr; Delete Account. This permanently removes your
-      profile, photos, albums, messages, and associated data from our systems.</li>
-    <li><strong>Control notifications and visibility</strong> through the app's Settings and Safety &amp; Privacy screens.</li>
-    <li><strong>Block or report</strong> other users.</li>
-  </ul>
-
-  <h3>California residents (CCPA / CPRA)</h3>
-  <p>If you live in California, you have the right to know what personal information we collect, to access and
-    delete it, to correct it, and to not be discriminated against for exercising these rights. Because we do not
-    sell personal information or share it for cross-context behavioral advertising, there is nothing to opt out of
-    in that respect. We limit the use of sensitive personal information to providing the service, as described above.</p>
-  <p>The categories of personal information we collect are described in Section 1: identifiers, account and contact
-    data, approximate location, user content (photos, messages), sensitive information you choose to provide, and
-    product-interaction data. To exercise any right, contact us at
-    <a href="mailto:support@rushapp.io">support@rushapp.io</a>. You may also delete your
-    account directly in the app.</p>
-
-  <h2>6. Data retention</h2>
+  <h2>7. Data retention</h2>
   <p>We keep your information for as long as your account is active. When you delete your account, we delete your
     personal data and stored media. We may retain limited records where required for legal, safety, or
-    fraud-prevention purposes, for no longer than necessary.</p>
+    fraud-prevention purposes, and only for as long as necessary for those purposes.</p>
 
-  <h2>7. Security</h2>
+  <h2>8. Security</h2>
   <p>Data is encrypted in transit (HTTPS) and at rest, and access to profile data is restricted by row-level
     security rules on our backend. No system is perfectly secure, but we work to protect your information.</p>
 
-  <h2>8. Children</h2>
+  <h2>9. Children</h2>
   <p>Rush is for adults only. It is not directed to anyone under 18, and we do not knowingly collect information
     from anyone under 18. If we learn that an account belongs to someone under 18, we will remove it.</p>
 
-  <h2>9. International users</h2>
+  <h2>10. International users and data transfers</h2>
   <p>Rush is operated from, and data is stored in facilities located in, the United States. If you use Rush from
-    outside the United States, you consent to processing your information in the United States.</p>
+    outside the United States — including from the EEA or UK — your information will be transferred to and processed
+    in the United States. Where required, such transfers are made on the basis of appropriate safeguards or your
+    consent. By using Rush from outside the United States, you understand your information will be processed in the
+    United States.</p>
 
-  <h2>10. Changes to this policy</h2>
+  <h2>11. Changes to this policy</h2>
   <p>We may update this policy from time to time. When we do, we will revise the "Last updated" date above and,
     for material changes, provide notice in the app.</p>
 
-  <h2>11. Contact us</h2>
-  <p>Questions about this policy or your data? Contact
+  <h2>12. Contact us</h2>
+  <p>Questions about this policy or your data, or to exercise any of your rights? Contact
     <a href="mailto:support@rushapp.io">support@rushapp.io</a>.</p>
 
-  <footer>Operator: <span class="placeholder">[OPERATOR NAME]</span> · Rush · United States.</footer>
+  <footer>Data controller: Chaotic Neutral LLC · Rush · United States. Contact: support@rushapp.io</footer>
 </main>
 </body>
 </html>
