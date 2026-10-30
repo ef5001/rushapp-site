@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Rush — Safety check-in</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<style>
+  :root { --ink:#1a1620; --ink-2:#4a4550; --line:#e6e1e9; --accent:#c81e4c; --bg:#ffffff; --surface:#faf8fa;
+    --ok:#1f7a4d; --warn:#b42318; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink:#f0ecf4; --ink-2:#b4acbe; --line:#2b2632; --accent:#ff85a1; --bg:#141118; --surface:#1c1822;
+      --ok:#5fd39a; --warn:#ff7a6e; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif; line-height:1.5; }
+  main { max-width:640px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:26px; letter-spacing:-.02em; margin:0 0 4px; }
+  .sub { color:var(--ink-2); font-size:14px; margin:0 0 20px; }
+  .banner { border-radius:14px; padding:16px 18px; margin:0 0 18px; font-weight:600; font-size:16px;
+    background:var(--surface); border:1px solid var(--line); }
+  .banner small { display:block; font-weight:400; color:var(--ink-2); font-size:14px; margin-top:4px; }
+  .banner.alert { border-color:var(--warn); border-left:4px solid var(--warn); }
+  .banner.alert strong { color:var(--warn); }
+  .banner.safe { border-left:4px solid var(--ok); }
+  .banner.safe strong { color:var(--ok); }
+  .card { display:flex; gap:14px; align-items:center; background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:14px; margin:0 0 14px; }
+  .card img { width:56px; height:56px; border-radius:50%; object-fit:cover; background:var(--line); flex:none; }
+  .card .label { color:var(--ink-2); font-size:13px; }
+  .card .value { font-size:17px; font-weight:600; }
+  dl { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; margin:0 0 16px; font-size:15px; }
+  dt { color:var(--ink-2); }
+  dd { margin:0; }
+  #map { height:320px; border-radius:14px; border:1px solid var(--line); margin:0 0 8px; }
+  .when { color:var(--ink-2); font-size:13px; margin:0 0 18px; }
+  .callout { background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:10px; padding:12px 16px; font-size:14px; color:var(--ink-2); }
+  .hidden { display:none; }
+  footer { margin-top:32px; color:var(--ink-2); font-size:12.5px; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Safety check-in</h1>
+  <p class="sub" id="sub">Loading…</p>
+
+  <div id="banner" class="banner hidden"></div>
+
+  <section id="details" class="hidden">
+    <div class="card">
+      <img id="photo" alt="" referrerpolicy="no-referrer">
+      <div>
+        <div class="label">Meeting</div>
+        <div class="value" id="meeting"></div>
+      </div>
+    </div>
+    <dl>
+      <dt>Where</dt><dd id="place"></dd>
+      <dt>Started</dt><dd id="started"></dd>
+      <dt>Check-in</dt><dd id="checkin"></dd>
+    </dl>
+    <div id="map" class="hidden"></div>
+    <p class="when" id="located"></p>
+  </section>
+
+  <div class="callout">Rush can't contact emergency services for you. If you're worried and can't reach your
+    friend, call them, then call 911 if you need to.</div>
+
+  <footer>This page updates on its own every 30 seconds. Only people with this link can see it, and it stops
+    working 24 hours after the session ends. <a href="/">Rush</a></footer>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<script>
+(function () {
+  var ENDPOINT = 'https://vkdmtyblgurcieshqzgl.supabase.co/functions/v1/safe-view';
+  // The token is in the fragment so it never reaches a server log.
+  var token = (location.hash || '').replace(/^#/, '');
+  var $ = function (id) { return document.getElementById(id); };
+  var map = null, marker = null, timer = null;
+
+  function time(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+  function ago(iso) {
+    var mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+    if (mins < 1) return 'just now';
+    if (mins === 1) return '1 minute ago';
+    if (mins < 60) return mins + ' minutes ago';
+    var h = Math.floor(mins / 60);
+    return h === 1 ? 'about an hour ago' : 'about ' + h + ' hours ago';
+  }
+  function banner(kind, title, detail) {
+    var b = $('banner');
+    b.className = 'banner ' + kind;
+    b.textContent = '';
+    var strong = document.createElement('strong');
+    strong.textContent = title;
+    b.appendChild(strong);
+    if (detail) {
+      var small = document.createElement('small');
+      small.textContent = detail;
+      b.appendChild(small);
+    }
+  }
+  function gone() {
+    $('sub').textContent = 'This link has expired or isn’t valid.';
+    $('banner').className = 'banner hidden';
+    $('details').className = 'hidden';
+    if (timer) clearInterval(timer);
+  }
+
+  function render(d) {
+    $('sub').textContent = d.name + ' shared this with you on Rush.';
+    if (d.status === 'safe' || d.status === 'ended') {
+      banner('safe', d.name + ' has checked in and is safe.', d.endedAt ? 'Checked in at ' + time(d.endedAt) + '.' : '');
+      $('details').className = 'hidden';
+      if (timer) clearInterval(timer);
+      return;
+    }
+    if (d.status === 'alerted') {
+      banner('alert', d.name + ' hasn’t checked in.',
+        'Their check-in was due at ' + time(d.checkInAt) + '. Try calling them. If you can’t reach them and are worried, call 911.');
+    } else {
+      banner('', d.name + ' is meeting someone and will check in by ' + time(d.checkInAt) + '.',
+        d.textAlerts ? 'You’ll get a text if they don’t.' : 'If they don’t, this page will show an alert.');
+    }
+
+    $('details').className = '';
+    $('meeting').textContent = (d.meeting && d.meeting.name) || 'Someone';
+    var photo = d.meeting && d.meeting.photo;
+    var hasPhoto = /^https:\/\//.test(photo || '');
+    $('photo').style.display = hasPhoto ? '' : 'none';
+    if (hasPhoto) $('photo').src = photo;
+    $('place').textContent = d.place || 'Not given';
+    $('started').textContent = time(d.startedAt);
+    $('checkin').textContent = time(d.checkInAt);
+
+    if (d.location && window.L) {
+      var ll = [d.location.lat, d.location.lng];
+      $('map').className = '';
+      if (!map) {
+        map = L.map('map', { scrollWheelZoom: false }).setView(ll, 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        marker = L.marker(ll).addTo(map);
+      } else {
+        marker.setLatLng(ll);
+        map.panTo(ll);
+      }
+      $('located').textContent = 'Last location ' + ago(d.location.at) + '.';
+    } else {
+      $('located').textContent = 'No location shared yet.';
+    }
+  }
+
+  function load() {
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: token })
+    }).then(function (r) {
+      if (r.status === 404) return gone();
+      if (!r.ok) throw new Error(r.status);
+      return r.json().then(render);
+    }).catch(function () {
+      $('sub').textContent = 'Couldn’t refresh. Trying again…';
+    });
+  }
+
+  if (!/^[0-9a-f]{64}$/.test(token)) return gone();
+  load();
+  timer = setInterval(load, 30000);
+})();
+</script>
+</body>
+</html>
