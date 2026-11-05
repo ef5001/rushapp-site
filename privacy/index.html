@@ -32,7 +32,7 @@
 <body>
 <main>
   <h1>Privacy Policy</h1>
-  <p class="sub">Rush — a location-based social app for adults. Last updated: August 22, 2026.</p>
+  <p class="sub">Rush — a location-based social app for adults. Last updated: November 5, 2026.</p>
 
   <div class="callout">
     Rush is intended only for people <strong>18 years of age or older</strong>. This policy explains what we
@@ -67,16 +67,37 @@
   <h3>Location</h3>
   <ul>
     <li>Your approximate device location, used to show you people nearby and to display distance.</li>
-    <li>Location is collected <strong>only while you are using the app</strong> (foreground). We do not track your
-      location in the background.</li>
+    <li>Location is collected <strong>only while you are using the app</strong> (foreground), with one exception:
+      during a <strong>safety mode</strong> session that you start, Rush also uses your location in the background
+      (with your "Always" permission) and shares it with the trusted contact you chose. It stops when the session ends.</li>
+    <li>When you check in somewhere, the place you chose is shown with your profile for up to two hours. When you
+      host a plan, its place (or, if you don't add one, your approximate location) is shown to people who can see the plan.</li>
     <li>Your position is shown to other users only as an approximate, fuzzed location on the map and as a
       rounded distance — never your exact coordinates.</li>
   </ul>
 
   <h3>Content and activity</h3>
   <ul>
-    <li>Messages and media you send in chats.</li>
+    <li>Messages and media you send in one-to-one chats, group chats and plan chats, including message requests.</li>
+    <li>Posts and check-ins (a place, a caption, photos or a short video), and stories, which disappear after 24 hours.
+      You can see who viewed your story.</li>
+    <li>Plans you host or ask to join, including the note you add to a join request.</li>
+    <li>Vouches you write or receive.</li>
     <li>Interactions such as likes, matches, blocks, reports, and your online / last-active status.</li>
+  </ul>
+
+  <h3>Safety mode</h3>
+  <ul>
+    <li>If you use safety mode, the name and phone number of the trusted contact you pick from your phone's contacts.
+      Rush saves only the contacts you pick; it does not upload your address book.</li>
+    <li>While a session runs: who you're meeting, the place, your check-in time and your location. Anyone with the
+      session's link (the person you sent it to) can see these until the session ends. Rush does not send texts;
+      you send the link yourself from your own phone.</li>
+  </ul>
+
+  <h3>Camera and microphone</h3>
+  <ul>
+    <li>Used only when you take a photo or record a video in the app. Nothing is recorded otherwise.</li>
   </ul>
 
   <h3>Device information</h3>
@@ -84,9 +105,10 @@
     <li>A push-notification token for the device, so we can deliver notifications you have enabled.</li>
   </ul>
 
-  <div class="callout"><strong>We do not use tracking or advertising SDKs.</strong> Rush does not read your
-    device's advertising identifier (IDFA), does not include third-party ad or analytics trackers, and does not
-    track you across other apps or websites.</div>
+  <div class="callout"><strong>Ads without tracking.</strong> Rush shows banner ads from Google AdMob. We request
+    <strong>non-personalized</strong> ads only: Rush does not read your device's advertising identifier (IDFA), does not
+    ask to track you, includes no third-party analytics trackers, and does not track you across other apps or websites.
+    To serve and measure an ad, Google receives limited technical information such as your IP address and device type.</div>
 
   <h2>2. How we use your information</h2>
   <ul>
@@ -160,6 +182,9 @@
   <h3>With other users</h3>
   <p>Your profile — including your display name, photos, the profile details you fill in, and your approximate
     distance — is visible to other users of Rush. Messages you send are delivered to the people you send them to.
+    In a group or plan chat, the other members see your name, photo, and what you send there. A plan's host sees
+    your join request and its note. Posts, check-ins and stories are visible to other users nearby, and vouches
+    appear on a profile only after its owner approves them.
     Please share only what you are comfortable making visible to other members.</p>
   <div class="callout">Profile photos are served from a public content-delivery URL so they load quickly for other
     users; anyone with the direct link to a photo can view it. Private album media is access-controlled.</div>
@@ -170,7 +195,10 @@
     <tr><th>Provider</th><th>Purpose</th></tr>
     <tr><td>Supabase</td><td>Backend database, authentication, and media storage (our hosting infrastructure).</td></tr>
     <tr><td>Expo</td><td>Push-notification delivery and over-the-air app updates.</td></tr>
-    <tr><td>Resend</td><td>Sending account and verification emails.</td></tr>
+    <tr><td>Resend</td><td>Sending account and verification emails, and report notifications to our team.</td></tr>
+    <tr><td>Sightengine</td><td>Automatically scanning public photos and videos for content that breaks our rules.</td></tr>
+    <tr><td>Google AdMob</td><td>Serving non-personalized banner ads.</td></tr>
+    <tr><td>Apple</td><td>Sign in with Apple, if you use it, and searching for places when you check in or add a place to a plan.</td></tr>
   </table>
 
   <h3>For legal and safety reasons</h3>
@@ -186,6 +214,9 @@
   </ul>
 
   <h2>7. Data retention</h2>
+  <p>Some content is removed automatically: stories after 24 hours, a check-in's "here now" status after two
+    hours, a plan's chat 48 hours after the plan ends, and ignored message requests after 90 days. When you report
+    someone, a copy of the reported messages is kept with the report so our team can review it.</p>
   <p>We keep your information for as long as your account is active. When you delete your account, we delete your
     personal data and stored media. We may retain limited records where required for legal, safety, or
     fraud-prevention purposes, and only for as long as necessary for those purposes.</p>
